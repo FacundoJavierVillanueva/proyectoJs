@@ -18,159 +18,123 @@ const paciente2 = new paciente("Camila", 21, 150, 45)
 const paciente3 = new paciente("Martha", 90, 151, 50)
 
 
-const lista = [paciente1, paciente2, paciente3]; 
+let lista = [paciente1, paciente2, paciente3]
+if(localStorage.getItem("lista")){
+    lista = JSON.parse(localStorage.getItem("lista"))
+}else{
+    lista.push(paciente1 ,paciente2 ,paciente3)
+    localStorage.setItem("lista", JSON.stringify(lista))
+}
 
-function verLista(array) {
 
-    console.log(`Nuestros pacientes son: `)
-
+//DOM CON ARRAY DE OBJETOS: 
+let pacientesDiv = document.getElementById("pacientes")
+let nuevoPacienteDiv = document.createElement("div") 
+//Lista de pacientes (recorrer)
+function  mostrarPacientes(array){
+    pacientesDiv.innerHTML = ``
     for (let paciente of array) {
-        console.log(paciente.nombre, paciente.edad, paciente.altura, paciente.peso)
+        let nuevoPacienteDiv = document.createElement("div")
+        nuevoPacienteDiv.className = "col-12 col-md-6 col-lg-4 my-2"
+        nuevoPacienteDiv.innerHTML = `<div id="${paciente.nombre}" class="card" style="width: 18rem;">
+        <img class="card-img-top img-fluid" style="height: 200px;"src="assets/${paciente.imagen}" alt="${paciente.nombre} de ${paciente.peso}">
+        <div class="card-body">
+           <h4 class="card-title">${paciente.nombre}</h4>
+           <p>Edad: ${paciente.edad}</p>
+           <p class="">Peso: ${paciente.peso}</p>
+           <p class="">Altura: ${paciente.altura}</p>
+        <button id="" class="btn btn-outline-success">Calcular IMC</button>
+        </div>
+     </div>`
+pacientesDiv.appendChild(nuevoPacienteDiv)
     }
 }
+//capturando IDs de botones
+let verListaPacientes = document.getElementById("verPacientes")
+verListaPacientes.addEventListener("click", ()=>{
+   mostrarPacientes(lista)
+})
 
-//Agregar paciente
-function agregarPaciente() {
-    let ingresarNombre = prompt("Ingrese su nombre") 
-    let ingresarEdad = parseInt(prompt ("Ingrese su edad"))
-    let ingresarAltura = parseInt(prompt("Ingrese su altura") )
-    let ingresarPeso = parseInt(prompt ("Ingrese su peso"))
-
-    const pacienteNuevo = new paciente(ingresarNombre, ingresarEdad, ingresarAltura, ingresarPeso)
-
-    lista.push(pacienteNuevo)
-
-}
-function verPacientes(array) {
-
-    console.log(`Nuestros pacientes son: `)
-
-    for (let paciente of array) {
-        console.log(paciente.nombre, paciente.edad, paciente.altura, paciente.peso)
-    }
-}
-//Calcular IMC
-function calcularIMC(){
-    let ingresarPeso = parseInt(prompt("Ingrese su peso") )
-    let ingresarAltura = parseInt(prompt ("Ingrese su altura"))
-    let alTURA = (ingresarAltura / 100)
-    alert("Tu porcentaje de IMC " + (ingresarPeso / (alTURA * alTURA ) ))
-
-}
-//Presión
-function calcularPresion(){
-    let presionSistolica = parseInt(prompt("Ingrese presión sistolica (alta)"))
-    let presionDiastolica = parseInt(prompt("Ingrese presión diastolica (baja)"))
-    if (presionSistolica <= 90 || presionDiastolica <= 60){
-        alert("Su presión arterial esta BAJA")
-    }
-    if(presionSistolica <= 120 && presionDiastolica <= 80){
-        alert("Su presión arterial esta NORMAL")
-    }
-    if (presionSistolica > 120 || presionDiastolica > 80 ){
-        alert("Su presión arterial esta ALTA")
-    }
-
-}
-//ARRAYS 
-function buscarporNombre(array) {
-    let datoBusqueda = prompt("Ingrese el nombre del paciente");
-    if (datoBusqueda !== null) {
-        datoBusqueda = datoBusqueda.trim(); 
-        if (datoBusqueda !== "") {
-            
-            let busqueda = array.filter(
-                (dato) => dato.nombre.toLowerCase().includes(datoBusqueda.toLowerCase()));
-            if (busqueda.length === 0) {
-                console.log(`El paciente "${datoBusqueda}" no está nuestra lista.`);
-            } else {
-                verLista(busqueda);
-            }
-        } else {
-            console.log("No se ingresó ningún dato de búsqueda.");
-        }
-    } else {
-        console.log("El ingreso de datos fue cancelado.");
-    }
-}
-function ordenarEdad(array) {
-    const ordenEdad = [].concat(array)
-    console.log(ordenEdad)
-    ordenEdad.sort((a, b) => a.edad - b.edad)
-    verLista(ordenEdad)
-}
-function ordenarAlfabeticamente(array) {
-    const arrayAlfabetico = [].concat(array)
-    arrayAlfabetico.sort((a, b) => {
-        if (a.nombre > b.nombre) {
-            return 1
-        }
-        if (a.nombre < b.nombre) {
-            return -1
-        }
-            return 0
-    })
-
-    verLista(arrayAlfabetico)
+let ocultarLista = document.getElementById("ocultarLista")
+ocultarLista.ondblclick = () => {
+   pacientesDiv.innerHTML = ``
 }
 
-function ordenarLista(array) {
-    let opcion = parseInt(prompt(`¿Comó deseas ordenarlo?
-          1 - Ordenar alfabeticamente
-          2 - Ordenar por edad`))
 
-    switch (opcion) {
-        case 1:
-            ordenarAlfabeticamente(array)
-            break
-        case 2:
-            ordenarEdad(array)
-            break;
+//ordenando arrays por criterio
+let selectOrden = document.getElementById("selectOrden")
 
-        default:
-            console.log(`La opcion ${opcion} no es válida`)
-            break
-
-    }
-}
-
-//Menu
-let salirMenu = false
-do{
-let opcionIngresada = parseInt(prompt(`Ingrese la opción deseada
-    1 - Agregar paciente
-    2 - Lista de pacientes
-    3 - Ordenar Lista
-    4 - Buscar por Nombre
-    5 - Calcular IMC
-    6 - Calcular Presion Arterial
-    0 - Salir del menu`))
-   switch(opcionIngresada){
-    case 1:
-        agregarPaciente()
-     break
-   case 2:
-       verLista(lista)
-     break
-    case 3:
-       ordenarLista(lista)
-     break
-     case 4:
-        buscarporNombre(lista)
+selectOrden.addEventListener("change", () => {
+   console.log(selectOrden.value)
+   switch(selectOrden.value){
+      case "1":
+         ordenarMayorMenor(lista)
       break
-
-   case 5:
-        calcularIMC()
-     break
-     case 6:
-           calcularPresion()
-     break        
-      case 0:
-         console.log(`Gracias por utilizar nuestra app. Saludos!`)
-         salirMenu = true
-      break   
+      case "2":
+         ordenarMenorMayor(lista)
+      break
+      case "3":
+         ordenarAlfabeticamenteNombre(lista)
+      break
       default:
-         console.log("Opción no válida, ingrese alguna presente en el menu")
+         mostrarCatalogo(lista)
       break
    }
-}while(!salirMenu)
+}
+)
+
+//hoisting 
+function ordenarMenorMayor(array){
+    const menorMayor = [].concat(array)
+   console.log(menorMayor)
+   menorMayor.sort((a,b) => a.edad - b.edad)
+   mostrarPacientes(menorMayor)
+ }
+ 
+ function ordenarMayorMenor(array){
+   const mayorMenor = [].concat(array)
+   mayorMenor.sort((elem1 ,elem2) => elem2.edad - elem1.edad)
+   mostrarPacientes(mayorMenor)
+ }
+ 
+ function ordenarAlfabeticamenteNombre(array){
+   const arrayAlfabetico = [].concat(array)
+   arrayAlfabetico.sort( (a,b) =>{
+      if (a.nombre > b.nombre) {
+         return 1
+       }
+       if (a.nombre < b.nombre) {
+         return -1
+       }
+       return 0
+   })
+ 
+   mostrarPacientes(arrayAlfabetico)
+ }
+ //DOM agregar paciente
+let agregarPacienteBtn = document.getElementById("guardarPacienteBtn")
+
+agregarPacienteBtn.addEventListener("click", function(event){
+   event.preventDefault()
+   agregarPaciente(lista)
+})
+ //agregar paciente para DOM:
+ function agregarPaciente(array){
+   let nombreIngresado = document.getElementById("nombreInput")
+   let edadIngresada = document.getElementById("edadInput")
+   let alturaIngresada = document.getElementById("alturaInput")
+   let pesoIngresado = document.getElementById("pesoInput")
+   
+   const pacienteNuevo = new paciente(nombreIngresado.value, edadIngresada.value, alturaIngresada.value, pesoIngresado.value, "pacienteNuevo.jpg")
+   //pusheo del array:
+   array.push(pacienteNuevo)
+   localStorage.setItem("lista", JSON.stringify (array))
+   mostrarPacientes(array)
+   
+   nombreIngresado.value = ""
+   edadIngresada.value = ""
+   alturaIngresada.value = ""
+   pesoIngresado.value = ""
+}
+
+
