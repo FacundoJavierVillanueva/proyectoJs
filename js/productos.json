@@ -1,0 +1,104 @@
+
+[    {
+        "id": "medicamento-01",
+        "titulo": "PARACETAMOL",
+        "imagen": "./img/medicamentos/01.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1500
+    },
+    {
+        "id": "medicamento-02",
+        "titulo": "OMEPRAZOL",
+        "imagen": "./img/medicamentos/02.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1000
+    },
+    {
+        "id": "medicamento-03",
+        "titulo": "SALBUTAMOL",
+        "imagen": "./img/medicamentos/03.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 750
+    },
+    {
+        "id": "medicamento-04",
+        "titulo": "ASPIRINA",
+        "imagen": "./img/medicamentos/04.jpg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1000
+    },
+    {
+        "id": "medicamento-05",
+        "titulo": "METFORMINA",
+        "imagen": "./img/medicamentos/05.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1800
+    },
+    {
+        "id": "medicamento-06",
+        "titulo": "NAPROXENO",
+        "imagen": "./img/medicamentos/06.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1200
+
+    },
+    {
+        "id": "medicamento-07",
+        "titulo": "CAPTORIL",
+        "imagen": "./img/medicamentos/07.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1000
+    },
+    {
+        "id": "medicamento-08",
+        "titulo": "LORATADINA",
+        "imagen": "./img/medicamentos/08.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 750
+    },
+    {
+        "id": "medicamento-09",
+        "titulo": "IBUPROFENO",
+        "imagen": "./img/medicamentos/09.jpeg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1100
+    },
+    {
+        "id": "medicamento-10",
+        "titulo": "AMBROXOL",
+        "imagen": "./img/medicamentos/10.jpg",
+        "categoria": {
+            "nombre": "Medicamentos",
+            "id": "medicamento"
+        },
+        "precio": 1000
+    }
+
+]
